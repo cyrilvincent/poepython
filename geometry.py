@@ -13,8 +13,6 @@ class Polygone(metaclass=abc.ABCMeta): # abstract
     @abc.abstractmethod
     def surface(self):...
 
-
-
 class Rectangle(Polygone): # Pas de public et private
 
     # Constructeur

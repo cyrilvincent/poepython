@@ -12,7 +12,8 @@ class Author:
         self.firstName= firstName
         self.lastName = lastName
 
-class Media:
+import abc
+class Media(metaclass=abc.ABCMeta):
 
     def __init__(self, id, title, price):
         self.id = id
@@ -21,8 +22,8 @@ class Media:
         self.publisher = None
         self.authors = []
 
-    def netPrice(self):
-        return self.price * 1.2
+    @abc.abstractmethod
+    def netPrice(self):...
 
 class Book(Media):
 
@@ -42,6 +43,52 @@ class Cd(Media):
     def netPrice(self):
         return self.price * 1.05 * 0.95 + 0.01
 
+class CartRow:
+
+    def __init__(self, media = None):
+        self.media = media
+        self.quantity = 1
+
+    def increment(self):
+        self.quantity += 1
+
+    def decrement(self):
+        self.quantity -= 1
+
+class Cart:
+
+    def __init__(self):
+        self.cartRows = []
+
+    def isMediaInCart(self, media):
+        res = None
+        for row in self.cartRows:
+            if media == row.media:
+                res = row
+                break
+        return res
+
+    def add(self, media):
+        row = self.isMediaInCart(media)
+        if row == None:
+            row = CartRow(media)
+            self.cartRows.append(row)
+        else:
+            row.increment()
+
+    def remove(self, media):
+        row = self.isMediaInCart()
+        if row.quantity > 1:
+            row.decrement()
+        else:
+            self.cartRows.remove(row)
+
+    def totalNetPrice(self):
+        res = 0
+        for row in self.cartRows:
+            res += row.media.netPrice()
+        return res
+
 if __name__ == '__main__':
     p1 = Publisher(0,"ENI")
     a1 = Author(1,"Cyril","Vincent")
@@ -49,6 +96,11 @@ if __name__ == '__main__':
     b.publisher = p1
     b.authors.append(a1)
     print(b.netPrice())
+    cart = Cart()
+    cart.add(b)
+    cart.add(b)
+    cart.add(Cd(0,"Johnny",10))
+    print(cart.totalNetPrice())
 
 
 
