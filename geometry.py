@@ -7,8 +7,15 @@ class Point:
     def __repr__(self): # = toString()
         return f"({self.x},{self.y})"
 
+import abc  # AbstractBaseClass
+class Polygone(metaclass=abc.ABCMeta): # abstract
 
-class Rectangle: # Pas de public et private
+    @abc.abstractmethod
+    def surface(self):...
+
+
+
+class Rectangle(Polygone): # Pas de public et private
 
     # Constructeur
     def __init__(self, width=0, height=0, origin=Point()): # self = this mais obligatoire
