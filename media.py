@@ -61,12 +61,17 @@ class Cart:
         self.cartRows = []
 
     def isMediaInCart(self, media):
-        res = None
-        for row in self.cartRows:
-            if media == row.media:
-                res = row
-                break
-        return res
+        # res = None
+        # for row in self.cartRows:
+        #     if media == row.media:
+        #         res = row
+        #         break
+        # return res
+        l = [row.media for row in self.cartRows if row.media == media]
+        if len(l) == 0:
+            return None
+        else:
+            return l[0]
 
     def add(self, media):
         row = self.isMediaInCart(media)
@@ -84,10 +89,11 @@ class Cart:
             self.cartRows.remove(row)
 
     def totalNetPrice(self):
-        res = 0
-        for row in self.cartRows:
-            res += row.media.netPrice()
-        return res
+        # res = 0
+        # for row in self.cartRows:
+        #     res += row.media.netPrice()
+        # return res
+        return sum([row.media.netPrice() for row in self.cartRows])
 
 if __name__ == '__main__':
     p1 = Publisher(0,"ENI")

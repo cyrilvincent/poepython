@@ -40,9 +40,14 @@ l.remove(99)
 for i in l:
     print(i)
 
-#sum
-#min
-#max
-#average
-#getPrimeNumbers
-#inverse
+# Liste en intention
+res = [x for x in l if x % 2 == 0] # Filtrer par chiffre pair
+res = [x + 1 for x in l] # map x + 1
+res = [x + 1 for x in res if x % 2 == 0] # Filtre + Map
+
+# Lambda
+res = filter(lambda x:x%2 ==0,l) # lambda x:x+1 <=> x -> x + 1
+res = map(lambda x:x+1,l) # map
+res = map(lambda x:x+1, filter(lambda x:x%2 ==0, l)) # map + filtre
+
+
