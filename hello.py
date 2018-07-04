@@ -32,6 +32,8 @@ print(isPrime(7))
 print(isPrime(8))
 
 l = [1,2,3,4,5,6,7,8,9]
+l2 = [1,2,3,4,5,6,7,8,9]
+l3 = l + l2
 #l = range(1,10)
 i = 3
 x = l[i]

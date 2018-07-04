@@ -67,7 +67,7 @@ class Cart:
         #         res = row
         #         break
         # return res
-        l = [row.media for row in self.cartRows if row.media == media]
+        l = [row for row in self.cartRows if row.media == media]
         if len(l) == 0:
             return None
         else:
