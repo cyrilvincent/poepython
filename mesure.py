@@ -18,7 +18,7 @@ t = np.array(theoricals)
 m = np.array(mesures)
 diff = m - t
 print(diff)
-quadratic = np.square(diff)
+quadratic = np.square(m-t)
 print(quadratic)
 
 
